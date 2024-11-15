@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -200,10 +201,11 @@
             height: 100%;
             background-color: var(--bg-color);
             z-index: 1002;
-            display: none;
-            justify-content: center;
-            align-items: flex-start;
-            padding-top: 4rem;
+           display: none;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 4rem;
+            
         }
 
         .search-container {
@@ -243,7 +245,10 @@
             max-height: 60vh;
             overflow-y: auto;
         }
-
+mark {
+  color: orange;
+  background-color: black;
+}
         .search-loader {
             display: none;
             justify-content: center;
@@ -368,6 +373,7 @@
         .footer-section ul li a:hover {
             color: var(--primary-color);
         }
+      
     </style>
 </head>
 <body>
@@ -388,22 +394,25 @@
             <div class="dark-mode-toggle" aria-label="Toggle dark mode">
                 <i class="fas fa-sun"></i>
                  <button class="menu-toggle" aria-label="Toggle navigation menu">Menu</button>
+          
             </div>
         </div>
     </nav>
 
-    <div class="search-overlay">
-        <div class="search-container">
-            <input type="text" id="search" placeholder="Search...">
-            <button class="search-close" aria-label="Close search"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="search-loader">
-            <div class="loader"></div>
-        </div>
-        <div class="search-results"></div>
+   <div class="search-overlay">
+    <div id="search-particles-js"></div>
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Search...">
+        <button class="search-close" aria-label="Close search"><i class="fas fa-times"></i></button>
     </div>
+    <div class="search-loader">
+        <div class="loader"></div>
+    </div>
+    <div class="search-results"></div>
+</div>
 
     <main>
+      
         <section id="home" class="fade-in">
             <h1>Welcome to W3Dhamma</h1>
             <p>W3Dhamma is your gateway to the profound teachings of Buddhism, including Abhidhamma, Sutta, and Vinaya. Our mission is to make these ancient wisdom traditions accessible to all in the digital age.</p>
@@ -542,7 +551,7 @@
         particlesJS('particles-js', {
             particles: {
                 number: { value: 100, density: { enable: true, value_area: 800 } },
-                color: { value: '#4a90e2' },
+            color: { value: ["#FF0000", "#00FF00", "#0000FF"] },
                 shape: { type: 'circle' },
                 opacity: { value: 0.5, random: true,
                     anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
@@ -605,6 +614,7 @@
                 }
             }
         });
+       
 
         function lightenColor(color, percent) {
             var num = parseInt(color.replace('#',''), 16),
