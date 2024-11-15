@@ -70,6 +70,7 @@
             color: var(--primary-color);
             text-decoration: none;
             transition: color 0.3s;
+            margin-left: 30px;
         }
 
         .logo:hover {
@@ -108,20 +109,29 @@
             width: 100%;
         }
 
-        .menu-toggle {
-            display: none; 
+       .menu-toggle {
+            display: none;
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1rem;
             color: var(--text-color);
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: 1px solid var(--text-color);
         }
 
         .menu-toggle:hover {
-            transform: scale(1.1);
+            color: var(--primary-color);
+            border-color: var(--primary-color);
         }
 
+        .main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
         .nav-right {
             display: flex;
             align-items: center;
