@@ -1,0 +1,736 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W3Dhamma - Modern Buddhist Teachings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f39c12;
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --nav-bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --primary-color: #64b5f6;
+            --secondary-color: #ffd54f;
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --nav-bg: #1e1e1e;
+            --card-bg: #1e1e1e;
+            --card-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: var(--nav-bg);
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .logo:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            flex: 1;
+            text-align: center;
+            padding: 0.5rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none; 
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            z-index: 1002;
+            display: none;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 4rem;
+        }
+
+        .search-container {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        #search {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--text-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1.2rem;
+        }
+
+        .search-toggle, .search-close {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .search-close {
+            position: absolute;
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%);
+        }
+
+        .search-results {
+            margin-top: 2rem;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .search-loader {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+        }
+
+        .loader {
+            border: 4px solid var(--bg-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .dark-mode-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            background-color: var(--bg-color);
+        }
+
+        .dark-mode-toggle i {
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 50%;
+                width: 80%;
+                height: 100%;
+                background-color: var(--nav-bg);
+                flex-direction: column;
+                padding: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links a {
+                padding: 1rem 0;
+                text-align: left;
+            }
+
+            .nav-right {
+                flex-grow: 1;
+                justify-content: flex-end;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        footer {
+            background-color: var(--nav-bg);
+            color: var(--text-color);
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin-right: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <nav>
+       <button class="menu-toggle" aria-label="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+       <a href="#" class="logo">W3Dhamma</a>
+       
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#abhidhamma">Abhidhamma</a>
+            <a href="#sutta">Sutta</a>
+            <a href="#vinaya">Vinaya</a>
+            <a href="#changelog">Changelog</a>
+        </div>
+        <div class="nav-right">
+            <button class="search-toggle" aria-label="Toggle search"><i class="fas fa-search"></i></button>
+            <div class="dark-mode-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-sun"></i>
+                 <button class="menu-toggle" aria-label="Toggle navigation menu">Menu</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="search-overlay">
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search...">
+            <button class="search-close" aria-label="Close search"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="search-loader">
+            <div class="loader"></div>
+        </div>
+        <div class="search-results"></div>
+    </div>
+
+    <main>
+        <section id="home" class="fade-in">
+            <h1>Welcome to W3Dhamma</h1>
+            <p>W3Dhamma is your gateway to the profound teachings of Buddhism, including Abhidhamma, Sutta, and Vinaya. Our mission is to make these ancient wisdom traditions accessible to all in the digital age.</p>
+            <div class="card-container">
+                <div class="card">
+                    <h2>Abhidhamma</h2>
+                    <p>Dive deep into the philosophical and psychological aspects of Buddhism.</p>
+                </div>
+                <div class="card">
+                    <h2>Sutta</h2>
+                    <p>Explore the discourses of the Buddha, containing core teachings and practices.</p>
+                </div>
+                <div class="card">
+                    <h2>Vinaya</h2>
+                    <p>Learn about the monastic code of conduct and its relevance to lay practitioners.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="abhidhamma">
+            <h1>Abhidhamma</h1>
+            <div class="card-container">
+                <div class="card">
+                    <h2>Introduction to Abhidhamma</h2>
+                    <p>Abhidhamma, meaning 'higher doctrine', is the third basket of the Tipitaka, the canonical scriptures of Buddhism. It offers a detailed psychological and philosophical analysis of the nature of reality.</p>
+                </div>
+                <div class="card">
+                    <h2>The Seven Books of Abhidhamma</h2>
+                    <p>The Abhidhamma Pitaka consists of seven books: Dhammasangani, Vibhanga, Dhatukatha, Puggalapannatti, Kathavatthu, Yamaka, and Patthana. Each book explores different aspects of the Dhamma in great detail.</p>
+                </div>
+                <div class="card">
+                    <h2>Key Concepts in Abhidhamma</h2>
+                    <p>Some key concepts in Abhidhamma include the analysis of consciousness (citta), mental factors (cetasika), matter (rupa), and Nibbana. It also explores the concept of dependent origination (paticca samuppada) in great depth.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sutta">
+            <h1>Sutta</h1>
+            <div class="card-container">
+                <div class="card">
+                    <h2>Introduction to Sutta</h2>
+                    <p>The Sutta Pitaka contains the discourses of the Buddha and his chief disciples, forming the doctrinal foundation of Theravada Buddhism. These teachings cover a wide range of topics, from practical advice for daily life to profound philosophical insights.</p>
+                </div>
+                <div class="card">
+                    <h2>Major Collections</h2>
+                    <p>The Sutta Pitaka is divided into five nikayas (collections): Digha Nikaya, Majjhima Nikaya, Samyutta Nikaya, Anguttara Nikaya, and Khuddaka Nikaya. Each collection contains suttas grouped by various criteria such as length or subject matter.</p>
+                </div>
+                <div class="card">
+                    <h2>Key Suttas</h2>
+                    <p>Some of the most famous suttas include the Dhammacakkappavattana Sutta (Setting the Wheel of Dhamma in Motion), the Maha-satipatthana Sutta (The Great Discourse on the Foundations of Mindfulness), and the Metta Sutta (Discourse on Loving-Kindness).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="vinaya">
+            <h1>Vinaya</h1>
+            <div class="card-container">
+                <div class="card">
+                    <h2>Introduction to Vinaya</h2>
+                    <p>The Vinaya Pitaka is the division of the Tripitaka that contains the rules and procedures that govern the Buddhist monastic community, or sangha. It not only defines rules for monks and nuns but also provides solutions for all kinds of situations and includes stories of the Buddha and his disciples.</p>
+                </div>
+                <div class="card">
+                    <h2>Structure of the Vinaya</h2>
+                    <p>The Vinaya Pitaka is divided into three parts: the Suttavibhanga, the Khandhaka, and the Parivara. The Suttavibhanga contains the patimokkha rules for monks and nuns, along with their origin stories. The Khandhaka deals with other aspects of monastic life, while the Parivara serves as a summary and study guide.</p>
+                </div>
+                <div class="card">
+                    <h2>Relevance for Lay Practitioners</h2>
+                    <p>While the Vinaya primarily concerns monastic discipline, many of its ethical principles and guidelines for harmonious community living are valuable for lay practitioners as well. Understanding the Vinaya can deepen one's appreciation of the monastic tradition and inspire a more disciplined approach to spiritual practice.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="changelog">
+            <h1>Changelog</h1>
+            <div class="card-container">
+                <div class="card">
+                    <h2>Version 1.0.0 (2023-06-01)</h2>
+                    <ul>
+                        <li>Initial launch of W3Dhamma</li>
+                        <li>Added sections for Abhidhamma, Sutta, and Vinaya</li>
+                        <li>Implemented responsive design for mobile and desktop</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h2>Version 1.1.0 (2023-06-15)</h2>
+                    <ul>
+                        <li>Added space-themed animated background</li>
+                        <li>Implemented light/dark mode toggle</li>
+                        <li>Added search functionality across all sections</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h2>Version 1.2.0 (2023-07-01)</h2>
+                    <ul>
+                        <li>Improved accessibility features</li>
+                        <li>Added more content to Abhidhamma and Sutta sections</li>
+                        <li>Optimized performance for faster loading times</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About W3Dhamma</h3>
+                <p>W3Dhamma is a modern platform dedicated to making Buddhist teachings accessible in the digital age. We offer comprehensive resources on Abhidhamma, Sutta, and Vinaya, aiming to bridge ancient wisdom with contemporary understanding.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#abhidhamma">Abhidhamma</a></li>
+                    <li><a href="#sutta">Sutta</a></li>
+                    <li><a href="#vinaya">Vinaya</a></li>
+                    <li><a href="#changelog">Changelog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="far fa-envelope"></i> Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        // Particles.js configuration
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 100, density: { enable: true, value_area: 800 } },
+                color: { value: '#4a90e2' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true,
+                    anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: { enable: true, speed: 2, size_min: 0.1, sync: false }
+                },
+                line_linked: { enable: false },
+                move: {
+                    enable: true,
+                    speed: 0.5,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'bubble' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                },
+                modes: {
+                    bubble: { distance: 200, size: 6, duration: 2, opacity: 0.8, speed: 3 },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true,
+            callbacks: {
+                onParticleUpdate: function(particle) {
+                    // Check for collision with other particles
+                    pJSDom[0].pJS.particles.array.forEach(function(p) {
+                        if (p !== particle) {
+                            var dx = particle.x - p.x,
+                                dy = particle.y - p.y,
+                                dist = Math.sqrt(dx * dx + dy * dy);
+                            
+                            if (dist <= particle.radius + p.radius) {
+                                // Particles are touching, increase size and brightness
+                                particle.radius = Math.min(particle.radius * 1.2, 8); // Increase size, max 8
+                                p.radius = Math.min(p.radius * 1.2, 8); // Increase size, max 8
+                                particle.color.value = lightenColor(particle.color.value, 20);
+                                p.color.value = lightenColor(p.color.value, 20);
+                                
+                                // Set a timeout to revert the changes after 2 seconds
+                                setTimeout(function() {
+                                    particle.radius = Math.max(particle.radius / 1.2, 3); // Decrease size, min 3
+                                    p.radius = Math.max(p.radius / 1.2, 3); // Decrease size, min 3
+                                    particle.color.value = darkenColor(particle.color.value, 20);
+                                    p.color.value = darkenColor(p.color.value, 20);
+                                }, 2000);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        function lightenColor(color, percent) {
+            var num = parseInt(color.replace('#',''), 16),
+                amt = Math.round(2.55 * percent),
+                R = (num >> 16) + amt,
+                G = (num >> 8 & 0x00FF) + amt,
+                B = (num & 0x0000FF) + amt;
+            return '#' + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (G<255?G<1?0:G:255)*0x100 + (B<255?B<1?0:B:255)).toString(16).slice(1);
+        }
+
+        function darkenColor(color, percent) {
+            var num = parseInt(color.replace('#',''), 16),
+                amt = Math.round(2.55 * percent),
+                R = (num >> 16) - amt,
+                G = (num >> 8 & 0x00FF) - amt,
+                B = (num & 0x0000FF) - amt;
+            return '#' + (0x1000000 + (R>0?R<1?0:R:0)*0x10000 + (G>0?G<1?0:G:0)*0x100 + (B>0?B<1?0:B:0)).toString(16).slice(1);
+        }
+
+        // Dark mode toggle
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        const body = document.body;
+
+        // Set initial dark mode
+        body.classList.add('dark-mode');
+        updateDarkModeIcon();
+        updateParticlesColor();
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            updateDarkModeIcon();
+            updateParticlesColor();
+        });
+
+        function updateDarkModeIcon() {
+            const isDarkMode = body.classList.contains('dark-mode');
+            darkModeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        function updateParticlesColor() {
+            const isDarkMode = body.classList.contains('dark-mode');
+            pJSDom[0].pJS.particles.color.value = isDarkMode ? '#64b5f6' : '#4a90e2';
+            pJSDom[0].pJS.particles.line_linked.color = isDarkMode ? '#64b5f6' : '#4a90e2';
+            pJSDom[0].pJS.fn.particlesRefresh();
+        }
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Search functionality
+        const searchToggle = document.querySelector('.search-toggle');
+        const searchOverlay = document.querySelector('.search-overlay');
+        const searchClose = document.querySelector('.search-close');
+        const searchInput = document.getElementById('search');
+        const searchLoader = document.querySelector('.search-loader');
+        const searchResults = document.querySelector('.search-results');
+        const sections = document.querySelectorAll('section');
+
+        searchToggle.addEventListener('click', () => {
+            searchOverlay.style.display = 'flex';
+            searchInput.focus();
+        });
+
+        searchClose.addEventListener('click', () => {
+            closeSearch();
+        });
+
+        searchInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        function performSearch() {
+            const searchTerm = searchInput.value.toLowerCase();
+            if (searchTerm.trim() === '') return;
+
+            searchLoader.style.display = 'flex';
+            searchResults.innerHTML = '';
+
+            setTimeout(() => {
+                searchLoader.style.display = 'none';
+                let results = '';
+                sections.forEach(section => {
+                    const text = section.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        const title = section.querySelector('h1').textContent;
+                        results += `<div class="search-result">
+                            <h3>${title}</h3>
+                            <p>${highlightText(section.textContent, searchTerm)}</p>
+                        </div>`;
+                    }
+                });
+                searchResults.innerHTML = results || '<p>No results found.</p>';
+            }, 3000);
+        }
+
+        function highlightText(text, term) {
+            const regex = new RegExp(`(${term})`, 'gi');
+            return text.replace(regex, '<mark>$1</mark>').substring(0, 200) + '...';
+        }
+
+        function closeSearch() {
+            searchOverlay.style.display = 'none';
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for fade-in effect
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
