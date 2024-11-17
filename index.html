@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark-mode">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W3Dhamma - Modern Buddhist Teachings</title>
-    <meta name="description" content="W3Dhamma - Your gateway to modern Buddhist teachings including Abhidhamma, Sutta, and Vinaya.">
+    <title>W3dhamma - Modern Buddhist Teachings</title>
+    <meta name="description" content="W3dhamma - Your gateway to modern Buddhist teachings including Abhidhamma, Sutta, and Vinaya.">
     <meta name="keywords" content="Buddhism, Abhidhamma, Sutta, Vinaya, Dhamma, Meditation, Mindfulness">
-    <meta name="author" content="W3Dhamma">
-    <meta property="og:title" content="W3Dhamma - Modern Buddhist Teachings">
-    <meta property="og:description" content="Explore the profound teachings of Buddhism with W3Dhamma. Learn about Abhidhamma, Sutta, and Vinaya in the digital age.">
+    <meta name="author" content="W3dhamma">
+    <meta property="og:title" content="W3dhamma - Modern Buddhist Teachings">
+    <meta property="og:description" content="Explore the profound teachings of Buddhism with W3dhamma. Learn about Abhidhamma, Sutta, and Vinaya in the digital age.">
     <meta property="og:image" content="https://w3dhamma.com/og-image.jpg">
     <meta property="og:url" content="https://w3dhamma.com">
     <meta name="twitter:card" content="summary_large_image">
@@ -16,16 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
     :root {
-        --primary-color: #4a90e2;
-        --secondary-color: #f39c12;
-        --bg-color: #ffffff;
-        --text-color: #333333;
-        --nav-bg: #f8f9fa;
-        --card-bg: #ffffff;
-        --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .dark-mode {
         --primary-color: #64b5f6;
         --secondary-color: #ffd54f;
         --bg-color: #121212;
@@ -33,6 +23,16 @@
         --nav-bg: #1e1e1e;
         --card-bg: #1e1e1e;
         --card-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+    }
+
+    .light-mode {
+        --primary-color: #4a90e2;
+        --secondary-color: #f39c12;
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --nav-bg: #f8f9fa;
+        --card-bg: #ffffff;
+        --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     * {
@@ -55,7 +55,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 1000;
+        z-index: -1;
         pointer-events: none;
     }
 
@@ -63,7 +63,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 2rem;
+        padding: 1rem 1rem;
         background-color: var(--nav-bg);
         position: sticky;
         top: 0;
@@ -72,7 +72,7 @@
     }
 
     .logo {
-        font-size: 1.8rem;
+        font-size: 2rem;
         font-weight: 600;
         color: var(--primary-color);
         text-decoration: none;
@@ -92,12 +92,13 @@
     .nav-links a {
         flex: 1;
         text-align: center;
-        padding: 0.5rem 1rem;
+        padding: 0.6rem 1rem;
         color: var(--text-color);
         text-decoration: none;
-        font-weight: 400;
+        font-weight: 100;
         transition: color 0.3s;
         position: relative;
+        height: 50px;
     }
 
     .nav-links a::after {
@@ -115,119 +116,40 @@
         width: 100%;
     }
 
-    .menu-toggle {
-        display: none;
-        background: none;
-        border: none;
-        font-size: 1rem;
-        color: var(--text-color);
-        cursor: pointer;
-        transition: color 0.3s;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        border: 1px solid var(--text-color);
-    }
-
-    .menu-toggle:hover {
-        color: var(--primary-color);
-        border-color: var(--primary-color);
-    }
-
-    .main {
-        max-width: 1200px;
-        margin: 2rem auto;
-        padding: 0 2rem;
-    }
-    .nav-right {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem; /* Update: Reduced gap */
-    }
-
-    .search-toggle, .dark-mode-toggle, .menu-toggle {
-        width: 32px; /* Update: Reduced size */
-        height: 32px; /* Update: Reduced size */
+    .menu-toggle, .light-mode-toggle, .search-toggle {
+        width: px;
+        height: px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         transition: all 0.3s ease;
-        background-color: var(--bg-color);
-        border: 1px solid var(--text-color);
-        font-size: 0.9rem; /* Update: Reduced font size */
-        padding: 0;
-        margin-left: 5px; /* Update: Reduced margin */
+        background-color: #ffd54f;
+        border: 1px solid red;
+        font-size: 1.2rem;
+        padding: 0.8rem;
+        margin: 0 5px;
     }
 
-    .search-toggle:hover, .dark-mode-toggle:hover, .menu-toggle:hover {
+    .menu-toggle:hover, .light-mode-toggle:hover, .search-toggle:hover {
         box-shadow: 0 0 10px var(--primary-color);
     }
 
-    .search-toggle:active, .dark-mode-toggle:active, .menu-toggle:active {
+    .menu-toggle:active, .light-mode-toggle:active, .search-toggle:active {
         box-shadow: 0 0 15px var(--secondary-color);
     }
 
-    .dark-mode-toggle {
-        background-color: var(--bg-color);
-    }
-
-    .menu-toggle {
-        display: none;
-    }
-
-    @media (max-width: 768px) {
-        .menu-toggle {
-            display: flex;
-        }
-        .nav-links {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .nav-links.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .nav-links a {
-            color: #ffffff;
-            font-size: 1.2rem; /* Update: Reduced font size */
-            margin: 0.75rem 0; /* Update: Reduced margin */
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .close-menu {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2rem;
-            color: #ffffff;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .close-menu:hover {
-            transform: rotate(90deg);
-        }
+    .nav-left, .nav-right {
+        display: flex;
+        align-items: center;
     }
 
     main {
         max-width: 1200px;
         margin: 2rem auto;
         padding: 0 2rem;
+        transition: opacity 0.3s ease;
     }
 
     section {
@@ -261,7 +183,7 @@
 
     .card-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 2rem;
     }
 
@@ -284,7 +206,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.8); /* Update: Changed background color */
         z-index: 1002;
         display: none;
         flex-direction: column;
@@ -308,7 +229,11 @@
         font-size: 1.2rem;
     }
 
-    .search-toggle, .search-close {
+    .search-close {
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-50%);
         background: none;
         border: none;
         color: var(--text-color);
@@ -317,22 +242,19 @@
         transition: color 0.3s;
     }
 
-    .search-close {
-        position: absolute;
-        top: 50%;
-        right: 1rem;
-        transform: translateY(-50%);
-    }
-
     .search-results {
         margin-top: 2rem;
         max-height: 60vh;
         overflow-y: auto;
+        width: 80%;
+        max-width: 600px;
     }
+
     mark {
         color: orange;
-        background-color: black;
+        background-color: transparent;
     }
+
     .search-loader {
         display: none;
         justify-content: center;
@@ -350,73 +272,41 @@
     }
 
     @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 
-
-    .dark-mode-toggle {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
+    .mobile-nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1003;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
+    }
+
+    .mobile-nav.active {
+        display: flex;
+    }
+
+    .mobile-nav a {
+        color: #ffffff;
+        font-size: 1.5rem;
+        margin: 1rem 0;
+        text-decoration: none;
+    }
+
+    .mobile-nav-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 2rem;
+        color: #ffffff;
         cursor: pointer;
-        transition: background-color 0.3s;
-        background-color: var(--bg-color);
-    }
-
-    .dark-mode-toggle i {
-        font-size: 1.2rem;
-        color: var(--text-color);
-    }
-
-    .search-overlay, .nav-links.active {
-        background-color: rgba(0, 0, 0, 0.9);
-    }
-
-    @keyframes cometMove {
-        0% { transform: translate(-100%, -100%); }
-        100% { transform: translate(100%, 100%); }
-    }
-
-    @keyframes starBlink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.3; }
-    }
-
-    .comet {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.7), transparent);
-        animation: cometMove 10s linear infinite;
-    }
-
-    .star {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background-color: white;
-        animation: starBlink 3s ease-in-out infinite;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-
-    .fade-in {
-        animation: fadeIn 0.5s ease-in-out;
     }
 
     footer {
@@ -424,6 +314,7 @@
         color: var(--text-color);
         padding: 2rem;
         margin-top: 4rem;
+
     }
 
     .footer-content {
@@ -463,12 +354,82 @@
     .footer-section ul li a:hover {
         color: var(--primary-color);
     }
+
+    @media (max-width: 1024px) {
+        .nav-links {
+            display: none;
+        }
+
+        .menu-toggle {
+            display: flex;
+        }
+
+        main {
+            padding: 0 1.5rem;
+        }
+
+        .card-container {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+    }
+
+    @media (max-width: 768px) {
+        nav {
+            padding: 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            font-size: 0.95rem;
+        }
+
+        .card-container {
+            grid-template-columns: 1fr;
+        }
+
+        .footer-section {
+            flex-basis: 100%;
+            margin-right: 0;
+        }
+    }
+
+    @media (max-width: 480px) {
+        main {
+            padding: 0 1rem;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+        }
+
+        p {
+            font-size: 0.9rem;
+        }
+    }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
     <nav>
-        <a href="#" class="logo">W3Dhamma</a>
+        <div class="nav-left">
+            <button class="menu-toggle" aria-label="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+            <a href="#" class="logo">W3dhamma</a>
+        </div>
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#abhidhamma">Abhidhamma</a>
@@ -478,10 +439,18 @@
         </div>
         <div class="nav-right">
             <button class="search-toggle" aria-label="Toggle search"><i class="fas fa-search"></i></button>
-            <button class="dark-mode-toggle" aria-label="Toggle dark mode"><i class="fas fa-sun"></i></button>
-            <button class="menu-toggle" aria-label="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+            <button class="light-mode-toggle" aria-label="Toggle light mode"><i class="fas fa-moon"></i></button>
         </div>
     </nav>
+
+    <div class="mobile-nav">
+        <a href="#home">Home</a>
+        <a href="#abhidhamma">Abhidhamma</a>
+        <a href="#sutta">Sutta</a>
+        <a href="#vinaya">Vinaya</a>
+        <a href="#changelog">Changelog</a>
+        <div class="mobile-nav-close">&times;</div>
+    </div>
 
     <div class="search-overlay">
         <div id="search-particles-js"></div>
@@ -497,9 +466,9 @@
 
     <main>
         <section id="home" class="fade-in">
-            <h1>Welcome to W3Dhamma</h1>
+            <h1>Welcome to W3dhamma</h1>
             <p>
-                W3Dhamma is your gateway to the profound teachings of Buddhism, including Abhidhamma, Sutta, and Vinaya. Our mission is to make these ancient wisdom traditions accessible to all in the digital age.
+                W3dhamma is your gateway to the profound teachings of Buddhism, including Abhidhamma, Sutta, and Vinaya. Our mission is to make these ancient wisdom traditions accessible to all in the digital age.
             </p>
             <div class="card-container">
                 <div class="card">
@@ -601,7 +570,7 @@
                 <div class="card">
                     <h2>Version 1.0.0 (2023-06-01)</h2>
                     <ul>
-                        <li>Initial launch of W3Dhamma</li>
+                        <li>Initial launch of W3dhamma</li>
                         <li>Added sections for Abhidhamma, Sutta, and Vinaya</li>
                         <li>Implemented responsive design for mobile and desktop</li>
                     </ul>
@@ -629,9 +598,9 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>About W3Dhamma</h3>
+                <h3>About W3dhamma</h3>
                 <p>
-                    W3Dhamma is a modern platform dedicated to making Buddhist teachings accessible in the digital age. We offer comprehensive resources on Abhidhamma, Sutta, and Vinaya, aiming to bridge ancient wisdom with contemporary understanding.
+                    W3dhamma is a modern platform dedicated to making Buddhist teachings accessible in the digital age. We offer comprehensive resources on Abhidhamma, Sutta, and Vinaya, aiming to bridge ancient wisdom with contemporary understanding.
                 </p>
             </div>
             <div class="footer-section">
@@ -686,49 +655,34 @@
         particlesJS('particles-js', particlesConfig);
         particlesJS('search-particles-js', particlesConfig);
 
-        // Dark mode toggle
-        const darkModeToggle = document.querySelector('.dark-mode-toggle');
-        const body = document.body;
+        // Light mode toggle
+        const lightModeToggle = document.querySelector('.light-mode-toggle');
+        const html = document.documentElement;
 
-        // Set initial dark mode
-        body.classList.add('dark-mode');
-        updateDarkModeIcon();
-        updateParticlesColor();
-
-        darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            updateDarkModeIcon();
-            updateParticlesColor();
+        lightModeToggle.addEventListener('click', () => {
+            html.classList.toggle('light-mode');
+            updateLightModeIcon();
         });
 
-        function updateDarkModeIcon() {
-            const isDarkMode = body.classList.contains('dark-mode');
-            darkModeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        }
-
-        function updateParticlesColor() {
-            const isDarkMode = body.classList.contains('dark-mode');
-            //pJSDom[0].pJS.particles.color.value = isDarkMode ? '#64b5f6' : '#4a90e2';
-            //pJSDom[0].pJS.particles.line_linked.color = isDarkMode ? '#64b5f6' : '#4a90e2';
-            //pJSDom[0].pJS.fn.particlesRefresh();
+        function updateLightModeIcon() {
+            const isLightMode = html.classList.contains('light-mode');
+            lightModeToggle.innerHTML = isLightMode ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
         }
 
         // Mobile menu toggle
         const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileNavClose = document.querySelector('.mobile-nav-close');
+        const main = document.querySelector('main');
 
         menuToggle.addEventListener('click', () => {
-            navLinks.classList.add('active');
-            const closeButton = document.createElement('span');
-            closeButton.innerHTML = '&times;';
-            closeButton.classList.add('close-menu');
-            navLinks.appendChild(closeButton);
+            mobileNav.classList.add('active');
+            main.style.opacity = '0.1';
+        });
 
-            closeButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                navLinks.classList.remove('active');
-                closeButton.remove();
-            });
+        mobileNavClose.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            main.style.opacity = '1';
         });
 
         // Search functionality
@@ -743,6 +697,7 @@
         searchToggle.addEventListener('click', () => {
             searchOverlay.style.display = 'flex';
             searchInput.focus();
+            main.style.opacity = '0.1';
         });
 
         searchClose.addEventListener('click', () => {
@@ -776,7 +731,7 @@
                     }
                 });
                 searchResults.innerHTML = results || '<p>No results found.</p>';
-            }, 3000);
+            }, 1000);
         }
 
         function highlightText(text, term) {
@@ -788,6 +743,7 @@
             searchOverlay.style.display = 'none';
             searchInput.value = '';
             searchResults.innerHTML = '';
+            main.style.opacity = '1';
         }
 
         // Smooth scroll for navigation links
@@ -797,6 +753,10 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
+                if (mobileNav.classList.contains('active')) {
+                    mobileNav.classList.remove('active');
+                    main.style.opacity = '1';
+                }
             });
         });
 
@@ -836,6 +796,7 @@
         }
 
         createCelestialObjects();
+        updateLightModeIcon();
     </script>
 </body>
 </html>
